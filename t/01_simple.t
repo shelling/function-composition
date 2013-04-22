@@ -1,7 +1,7 @@
 use Modern::Perl;
 use Test::More;
 
-use Function::Composition;
+use Function::Composition qw(compose);
 
 sub add_10 {
     map { $_ + 10 } @_;
@@ -13,7 +13,7 @@ sub multiple_2 {
 
 is (
     multiple_2(add_10(1..100)),
-    Function::Composition::compose(\&multiple_2, \&add_10)->(1..100),
+    compose(\&multiple_2, \&add_10)->(1..100),
     "composite function works",
 );
 
